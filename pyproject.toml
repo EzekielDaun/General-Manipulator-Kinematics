@@ -1,0 +1,25 @@
+[project]
+name = "general-manipulator-kinematics"
+version = "0.0.1"
+description = ""
+authors = [
+    { name = "Yifei Liu", email = "34564223+EzekielDaun@users.noreply.github.com" },
+]
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "jaxlie (>=1.5.0,<2.0.0)",
+    "matplotlib (>=3.10.5,<4.0.0)",
+    "pyopengl (>=3.1.9,<4.0.0)",
+    "pyqtgraph (>=0.13.7,<0.14.0)",
+    "pyside6 (<7.0.0)",
+    "networkx (>=3.5,<4.0)",
+    "jaxtyping (>=0.3.2,<0.4.0)",
+]
+
+[tool.poetry]
+packages = [{ include = "general_manipulator_kinematics", from = "src" }]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
