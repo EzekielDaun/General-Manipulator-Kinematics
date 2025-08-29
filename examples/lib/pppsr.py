@@ -13,12 +13,12 @@ from general_manipulator_kinematics.general_kinematics import (
 )
 
 
-@pytree_dataclass(frozen=True)
+@pytree_dataclass(frozen=True, slots=True)
 class JointCoordR9(AbstractLieGroupTree):
     r9: Float
 
 
-@pytree_dataclass(frozen=True)
+@pytree_dataclass(frozen=True, slots=True)
 class TaskCoordSE3SO23(AbstractLieGroupTree):
     pose: SE3
     rdof: SO2

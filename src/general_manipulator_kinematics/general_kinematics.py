@@ -9,7 +9,7 @@ from jax_dataclasses import pytree_dataclass
 from jaxtyping import Float
 
 
-@pytree_dataclass(frozen=True)
+@pytree_dataclass(frozen=True, slots=True)
 class AbstractLieGroupTree(ABC):
     """Abstract base class for coordinate composed by Lie groups.
     Members must be MatrixLieGroup or 1D JAX arrays.

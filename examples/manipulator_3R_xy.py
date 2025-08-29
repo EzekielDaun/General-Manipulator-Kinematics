@@ -12,13 +12,13 @@ from general_manipulator_kinematics.general_kinematics import (
 )
 
 
-@pytree_dataclass(frozen=True)
+@pytree_dataclass(frozen=True, slots=True)
 class JointCoord(AbstractLieGroupTree):
     theta_batched3: SO2
     xy: Float  # redundant, no meaning
 
 
-@pytree_dataclass(frozen=True)
+@pytree_dataclass(frozen=True, slots=True)
 class TaskCoord(AbstractLieGroupTree):
     pose: SE2
     xy: Float  # redundant, no meaning
