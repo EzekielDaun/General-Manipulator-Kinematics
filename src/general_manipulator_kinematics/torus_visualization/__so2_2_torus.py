@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
 from typing import List
 
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # type: ignore
 import numpy as np
 from jaxlie import SO2
-from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D  # type: ignore
 
 
 @dataclass(frozen=True)

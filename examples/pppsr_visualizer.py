@@ -12,13 +12,13 @@ from general_manipulator_kinematics.manipulator_visualizer import (
     JointAttributes,
     JointType,
     ManipulatorVisualizer,
-    ManipulatorVisualizerMPLConfig,
-    ManipulatorVisualizerPQGConfig,
+    ManipulatorVisualizerMPL,
+    ManipulatorVisualizerPQG,
 )
 
 
 @dataclass(frozen=True)
-class PPPSRVisualizer(ManipulatorVisualizer[TaskCoordSE3SO23, JointCoordR9]):
+class PPPSRVisualizerBase(ManipulatorVisualizer[TaskCoordSE3SO23, JointCoordR9]):
     """Visualizes the 3-PPPSR manipulator."""
 
     pppsr: PPPSR
@@ -94,8 +94,6 @@ class PPPSRVisualizer(ManipulatorVisualizer[TaskCoordSE3SO23, JointCoordR9]):
                 jnp.average(jnp.linalg.norm(pppsr.ai_SE3.translation(), axis=1))
             ),
             orientation_axis_factor=1e-1,
-            mpl_config=ManipulatorVisualizerMPLConfig(),
-            pqg_config=ManipulatorVisualizerPQGConfig(),
             pppsr=pppsr,
             a_i_z_prismatic_joints=a_i_z_prismatic_joints,
             a_i_y_prismatic_joints=a_i_y_prismatic_joints,
@@ -140,6 +138,14 @@ class PPPSRVisualizer(ManipulatorVisualizer[TaskCoordSE3SO23, JointCoordR9]):
         return joint_info
 
 
+class PPPSRVisualizerMPL(PPPSRVisualizerBase, ManipulatorVisualizerMPL):
+    pass
+
+
+class PPPSRVisualizerPQG(PPPSRVisualizerBase, ManipulatorVisualizerPQG):
+    pass
+
+
 def main():
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d import Axes3D
@@ -167,11 +173,11 @@ def main():
         rdof=SO2.from_radians(jnp.deg2rad(jnp.array([90.0, 90.0, 90.0]))),
     )
 
-    visualizer = PPPSRVisualizer.from_robot(robot)
+    mpl_visualizer = PPPSRVisualizerMPL.from_robot(robot)
 
     fig = plt.figure()
     ax_3d: Axes3D = fig.add_subplot(111, projection="3d")  # type: ignore
-    visualizer.mpl_plot(
+    mpl_visualizer.mpl_plot(
         ax_3d,
         ext_task_coord=task_coord,
         joint_coord=None,
@@ -179,10 +185,11 @@ def main():
     )
     plt.show()
 
+    pqg_visualizer = PPPSRVisualizerPQG.from_robot(robot)
     app = QApplication(sys.argv)
 
     widget = GLViewWidget()
-    for lst in visualizer.gl_graphics_items(
+    for lst in pqg_visualizer.gl_graphics_items(
         ext_task_coord=task_coord,
         joint_coord=None,
         end_effector_pose=task_coord.pose,

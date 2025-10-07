@@ -12,26 +12,40 @@ Lie group implementation is provided through the use of the [jaxlie](https://git
 
 ### Manipulator Visualizer
 
-Helper to render a manipulator in Matplotlib or PyQtGraph.
+Helpers to render a manipulator in Matplotlib or PyQtGraph.
 
 ### Torus Visualization
 
-Helper to visualized 2 or 3 SO2 rotations.
+Helpers to visualize 2 or 3 SO2 rotations.
 
 ## Installation
 
-- pip
+This package follows the [PEP 517](https://peps.python.org/pep-0517/) standard for building and installing Python packages. Install it with your favorite package manager.
+
+- core functionality:
   ```bash
-  pip install .
+  pip install "general_manipulator_kinematics @ git+https://github.com/EzekielDaun/General-Manipulator-Kinematics.git"
   ```
-- poetry
+- with Matplotlib visualization:
   ```bash
-  poetry install
+  pip install "general_manipulator_kinematics[matplotlib-viz] @ git+https://github.com/EzekielDaun/General-Manipulator-Kinematics.git"
+  ```
+- with PyQtGraph visualization:
+  ```bash
+  pip install "general_manipulator_kinematics[pyqtgraph-viz] @ git+https://github.com/EzekielDaun/General-Manipulator-Kinematics.git"
   ```
 
 ## Examples
 
 See [examples](./examples/) for example scripts.
+
+Visualization examples need this package to be installed with the `matplotlib-viz` and `pyqtgraph-viz` extras.
+
+```bash
+uv pip install -e ".[matplotlib-viz,pyqtgraph-viz]"
+```
+
+### Run Examples
 
 ```bash
 python -m examples {filename without .py extension}
