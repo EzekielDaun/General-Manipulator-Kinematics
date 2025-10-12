@@ -7,7 +7,7 @@
     name = "general-manipulator-kinematics"
     readme = "README.md"
     requires-python = ">=3.10, <4"
-    version = "0.0.4"
+    version = "0.0.5"
 
 [project.optional-dependencies]
     matplotlib-viz = ["matplotlib (>=3.10.5,<4.0.0)", "networkx (>=3,<4.0)"]
