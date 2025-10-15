@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, TypeVar
 
 import jax.numpy as jnp
 from jaxlie import SE3
@@ -7,9 +7,12 @@ from mpl_toolkits.mplot3d import Axes3D  # type: ignore
 
 from .__core import JointAttributes, JointType, ManipulatorVisualizer
 
+T = TypeVar("T")
+J = TypeVar("J")
+
 
 @dataclass(frozen=True)
-class ManipulatorVisualizerMPL[T, J](ManipulatorVisualizer):
+class ManipulatorVisualizerMPL(ManipulatorVisualizer[T, J]):
     revolute_axis_color = "c"
     prismatic_axis_color = "m"
 

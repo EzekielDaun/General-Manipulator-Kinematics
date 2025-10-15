@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Optional
+from typing import Generic, Optional, TypeVar
 
 import networkx as nx
 from jaxlie import SE3
@@ -22,8 +22,12 @@ class JointAttributes:
     limit: Optional[tuple] = None  # (lower, upper)
 
 
+T = TypeVar("T")
+J = TypeVar("J")
+
+
 @dataclass(frozen=True)
-class ManipulatorVisualizer[T, J](ABC):
+class ManipulatorVisualizer(Generic[T, J], ABC):
     """An abstract visualizer class including default implementations to visualize manipulators in Matplotlib and PyQtGraph."""
 
     joint_attributes: set[JointAttributes]

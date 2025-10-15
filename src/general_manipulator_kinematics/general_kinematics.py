@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from functools import partial
+from typing import Generic, TypeVar
 
 import jax
 import jax.numpy as jnp
@@ -18,7 +19,11 @@ class AbstractLieGroupTree(ABC):
     pass
 
 
-class AbstractManipulator[T: AbstractLieGroupTree, J: AbstractLieGroupTree](ABC):
+T = TypeVar("T", bound=AbstractLieGroupTree)
+J = TypeVar("J", bound=AbstractLieGroupTree)
+
+
+class AbstractManipulator(Generic[T, J], ABC):
     @abstractmethod
     def kinematic_constraints(self, task_coord: T, joint_coord: J) -> Float:
         raise NotImplementedError

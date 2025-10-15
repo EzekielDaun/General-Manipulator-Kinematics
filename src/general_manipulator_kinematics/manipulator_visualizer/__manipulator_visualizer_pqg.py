@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, TypeVar
 
 import jax.numpy as jnp
 import networkx as nx
@@ -28,6 +28,9 @@ from pyqtgraph.opengl.GLGraphicsItem import GLGraphicsItem  # type: ignore
 from PySide6.QtGui import QMatrix4x4  # type: ignore
 
 from .__core import JointType, ManipulatorVisualizer
+
+T = TypeVar("T")
+J = TypeVar("J")
 
 
 class GLAxisWidthItem(GLGraphicsItem):
@@ -76,7 +79,7 @@ class GLAxisWidthItem(GLGraphicsItem):
 
 
 @dataclass(frozen=True)
-class ManipulatorVisualizerPQG[T, J](ManipulatorVisualizer):
+class ManipulatorVisualizerPQG(ManipulatorVisualizer[T, J]):
     def gl_graphics_items(
         self,
         ext_task_coord: Optional[T],
